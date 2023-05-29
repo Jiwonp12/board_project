@@ -5,19 +5,10 @@ import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
 const TwLink = tw(Link)`
   flex justify-center items-center
-  w-16 h-8
-  mb-4
+  w-32 h-12
+  mb-6
   bg-emerald-500
-  rounded-sm
-`;
-
-const TwDiv = tw.div`
-  flex justify-center items-center
-  w-16 h-8
-  mb-4
-  bg-emerald-500
-  rounded-sm
-  cursor-pointer
+  rounded-md
 `;
 
 export default async function BoardLayout({
@@ -29,15 +20,15 @@ export default async function BoardLayout({
 
   return (
     <>
-      <aside className="flex-grow flex flex-col justify-start p-6 bg-amber-200">
+      <aside className="w-[12%] flex flex-col justify-start items-center shrink-0 p-6 bg-amber-200">
         <TwLink href="/">글쓰기</TwLink>
-        <TwDiv>전체글</TwDiv>
-        <TwDiv>프론트</TwDiv>
-        <TwDiv>백엔드</TwDiv>
-        <TwDiv>좋아요</TwDiv>
+        <TwLink href="/board">전체글</TwLink>
+        <TwLink href="/">프론트</TwLink>
+        <TwLink href="/">백엔드</TwLink>
+        <TwLink href="/">좋아요</TwLink>
       </aside>
-      {children}
-      <aside className="flex-grow flex flex-col justify-center p-6 bg-amber-200">
+      <div className="w-[76%]">{children}</div>
+      <aside className="w-[12%] flex flex-col justify-center items-center shrink-0 p-6 bg-amber-200">
         광고야잉
       </aside>
     </>
