@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import Item from "./Item";
 
 const page = () => {
-    return (
-        <div className='w-full h-full'>
-            board
-        </div>
-    );
+  return (
+    <article className="w-full h-full flex flex-col">
+      <Item />
+    </article>
+  );
 };
 
 export default page;

@@ -1,31 +1,67 @@
+import tw from "tailwind-styled-components";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
+import { SignIn, SignOut } from "./actions";
 
-const Header = () => {
-  const linkStyle =
-    "h-full flex items-center w-20 hover:text-white transition duration-200 active:translate-y-0.5";
+const TwLink = tw(Link)`
+h-full w-28
+flex items-center
+hover:text-white
+transition duration-200
+active:translate-y-0.5
+`;
+
+const TwSpan = tw.span`
+h-full w-28
+flex items-center justify-center
+hover:text-white
+transition duration-200
+active:translate-y-0.5
+cursor-pointer
+`;
+
+const TwHeader = tw.header`
+w-screen h-16 
+flex justify-start items-center 
+bg-gradient-to-r from-cyan-500 to-blue-500
+px-1
+`;
+
+export default async function Header() {
+  const sessionRes = await getServerSession(authOptions);
+
   return (
-    <header className="w-screen h-16 flex justify-start items-center bg-gradient-to-r from-cyan-500 to-blue-500">
-      <Link href="/" className={`${linkStyle}`}>
+    <TwHeader>
+      <TwLink href="/">
         <p className="mx-auto">로고</p>
-      </Link>
-      <Link href="/board" className={`${linkStyle}`}>
+      </TwLink>
+      <TwLink href="/board">
         <p className="mx-auto">게시판</p>
-      </Link>
-      <Link href="/info" className={`${linkStyle}`}>
-        <p className="mx-auto">내정보</p>
-      </Link>
-      <Link href="/about" className={`${linkStyle}`}>
+      </TwLink>
+      <TwLink href="/about">
         <p className="mx-auto">어바웃</p>
-      </Link>
-      <Link href="/" className={`${linkStyle} ml-auto`}>
+      </TwLink>
+      <TwLink href="/" className="ml-auto">
         <p className="mx-auto">후원하기</p>
-      </Link>
-      <Link href="/" className={`${linkStyle} ml-0`}>
-        <p className="mx-auto">로그인</p>
-      </Link>
-    </header>
+      </TwLink>
+      {sessionRes && (
+        <TwLink href="/info">
+          <div className="w-full flex items-center justify-evenly">
+            <Image
+              className="rounded-full"
+              src={sessionRes.user!.image!}
+              alt="프로필"
+              width={50}
+              height={50}
+            />
+            <span>{sessionRes.user!.name!}</span>
+          </div>
+        </TwLink>
+      )}
+      <TwSpan className="ml-0">{sessionRes ? <SignOut /> : <SignIn />}</TwSpan>
+    </TwHeader>
   );
-};
-
-export default Header;
+}
