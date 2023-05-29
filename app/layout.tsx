@@ -8,8 +8,8 @@ export const metadata = {
 };
 
 const TwMain = tw.main`
-  flex
-  flex-grow
+  w-full
+  flex flex-grow
 `;
 
 const TwFooter = tw.footer`
@@ -27,11 +27,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen h-full flex flex-col">
+      <body className="w-screen min-h-screen h-full flex flex-col">
         {/* @ts-expect-error Async Server Component */}
         <Header />
         <TwMain>{children}</TwMain>
-        <TwFooter>COPYRIGHT © 2023. ALL RIGHTS RESERVED by Jiwonp12</TwFooter>
+        <TwFooter>COPYRIGHT © 2023. ALL RIGHTS RESERVED by Jiwon Park</TwFooter>
       </body>
     </html>
   );
