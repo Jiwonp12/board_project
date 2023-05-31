@@ -1,6 +1,8 @@
-`use client`;
-
+import Link from "next/link";
 import tw from "tailwind-styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
 
 // interface Post {
 //   _id: ObjectId;
@@ -8,10 +10,10 @@ import tw from "tailwind-styled-components";
 //   content: string;
 //   author: string;
 //   category: string;
-//   comment: string;
+//   comment: string[];
 //   date: string;
 //   like: number;
-//   lsLiked: boolean;
+//   isLiked: boolean;
 // }
 const Item = ({ data }) => {
   const TwSection = tw.section`
@@ -28,23 +30,29 @@ const Item = ({ data }) => {
       {data.map(post => (
         <TwSection key={post._id.toString()}>
           <div className="flex justify-between">
-            <div className="text-xl font-bold cursor-pointer hover:text-white transition duration-200">
-              {post.title}
-            </div>
+            <Link href={`/board/detail/${post._id}`}>
+              <h1 className="text-xl font-bold cursor-pointer hover:text-white transition duration-200">
+                {post.title}
+              </h1>
+            </Link>
             <div>{post.author}</div>
           </div>
-          <div className="text-sm text-gray-600 font-bold cursor-pointer hover:text-white transition duration-200">
+          <h2 className="text-sm text-gray-600 font-bold cursor-pointer hover:text-white transition duration-200">
             {post.category === "front" ? "프론트엔드" : "백엔드"}
-          </div>
-          <div className="my-2 cursor-pointer">{post.content}</div>
-          <div className="flex text-xs">
-            <div className="mr-2">
-              댓글: {post.comment !== "" ? post.comment : "0"}
-            </div>
-            <div>좋아요: {post.like}</div>
-            <div className="ml-auto">
-              {new Date(post.date).toLocaleString()}
-            </div>
+          </h2>
+          <article className="my-2 cursor-pointer">{post.content}</article>
+          <div className="flex text-xs items-center">
+            <FontAwesomeIcon
+              icon={faComment}
+              className="fa-comment w-[16px] h-[16px] mr-1 text-slate-50 drop-shadow-sm"
+            />
+            <div className="mr-4">{post.comment.length}</div>
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="fa-heart w-[16px] h-[16px] mr-1 text-red-500 drop-shadow-sm"
+            />
+            <span>{post.like}</span>
+            <p className="ml-auto">{new Date(post.date).toLocaleString()}</p>
           </div>
         </TwSection>
       ))}
