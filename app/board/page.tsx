@@ -1,4 +1,3 @@
-import React from "react";
 import Item from "./Item";
 import { connectDB } from "../../util/database";
 
