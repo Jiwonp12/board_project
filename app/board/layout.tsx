@@ -21,11 +21,11 @@ export default async function BoardLayout({
   return (
     <>
       <aside className="w-[12%] flex flex-col justify-start items-center shrink-0 p-6 bg-amber-200">
-        <TwLink href="/">글쓰기</TwLink>
+        <TwLink href="/board/write">글쓰기</TwLink>
         <TwLink href="/board">전체글</TwLink>
-        <TwLink href="/">프론트</TwLink>
-        <TwLink href="/">백엔드</TwLink>
-        <TwLink href="/">좋아요</TwLink>
+        <TwLink href="/board/front">프론트</TwLink>
+        <TwLink href="/board/back">백엔드</TwLink>
+        <TwLink href="/board">좋아요</TwLink>
       </aside>
       <div className="w-[76%]">{children}</div>
       <aside className="w-[12%] flex flex-col justify-center items-center shrink-0 p-6 bg-amber-200">
