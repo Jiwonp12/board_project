@@ -8,5 +8,10 @@ body {
   height: 100vh;
   margin: 0;
   border: 0;
-  background-color: rgb(225, 226, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgb(245, 245, 245) 64%,
+    rgb(220, 233, 246) 100%
+  );
 }
