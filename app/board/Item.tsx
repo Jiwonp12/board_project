@@ -12,23 +12,27 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 //   category: string;
 //   comment: string[];
 //   date: string;
-//   like: number;
-//   isLiked: boolean;
+//   like: string;
 // }
 const Item = ({ data }) => {
   const TwSection = tw.section`
-  w-[70vw] h-[20vh]
-  flex flex-col justify-center 
-  mx-2 mt-4 p-4 
-  bg-gradient-to-r from-cyan-500 to-blue-500 rounded-md drop-shadow-md
+  w-[70vw] h-[8rem]
+  flex flex-col
+  mx-2 mb-6 p-2 
+  rounded-md drop-shadow-md
   hover:scale-105 transition duration-200
-  truncate
+  break-words
   `;
 
   return (
     <>
       {data.map(post => (
-        <TwSection key={post._id.toString()}>
+        <TwSection
+          key={post._id.toString()}
+          className={
+            post.category === "front" ? "bg-blue-400" : "bg-emerald-400"
+          }
+        >
           <div className="flex justify-between">
             <Link href={`/board/detail/${post._id}`}>
               <h1 className="text-xl font-bold cursor-pointer hover:text-white transition duration-200">
@@ -37,10 +41,19 @@ const Item = ({ data }) => {
             </Link>
             <div>{post.author}</div>
           </div>
-          <h2 className="text-sm text-gray-600 font-bold cursor-pointer hover:text-white transition duration-200">
-            {post.category === "front" ? "프론트엔드" : "백엔드"}
-          </h2>
-          <article className="my-2 cursor-pointer">{post.content}</article>
+          <Link
+            href={post.category === "front" ? "/board/front" : "/board/back"}
+          >
+            <h2 className="text-sm text-gray-600 font-bold cursor-pointer hover:text-white transition duration-200">
+              {post.category === "front" ? "프론트엔드" : "백엔드"}
+            </h2>
+          </Link>
+          <Link
+            href={`/board/detail/${post._id}`}
+            className="flex-grow cursor-pointer"
+          >
+            {post.content.slice(0, 80)}
+          </Link>
           <div className="flex text-xs items-center">
             <FontAwesomeIcon
               icon={faComment}

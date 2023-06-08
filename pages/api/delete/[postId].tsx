@@ -11,7 +11,7 @@ export default async function handler(
       let db = (await connectDB).db("forum");
       let data = await db
         .collection("post")
-        .deleteOne({ _id: new ObjectId(req.query.postId as any) });
+        .deleteOne({ _id: new ObjectId(req.query.postId as string) });
       res.status(204).end();
     } catch (error) {
       return res.status(500);

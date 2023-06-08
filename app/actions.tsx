@@ -7,7 +7,7 @@ import Image from "next/image";
 export function SignOut() {
   return (
     <button
-      className="flex bg-black text-neutral-200 px-4 py-3 rounded-md font-semibold text-sm hover:text-white transition-all border border-gray-800"
+      className="flex bg-black text-white px-4 py-3 rounded-md font-semibold text-sm hover:text-white transition-all border border-gray-800"
       onClick={() => signOut()}
     >
       로그아웃
@@ -22,6 +22,7 @@ export function SignIn() {
         className="mx-auto"
         src={kakao}
         alt="카카오 로그인"
+        priority={true}
         onClick={() => {
           signIn();
         }}

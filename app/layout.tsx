@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 const TwMain = tw.main`
-  w-full
+  w-full h-full
   flex flex-grow
 `;
 
@@ -16,7 +16,7 @@ const TwFooter = tw.footer`
 w-screen 
 flex justify-center items-center 
 p-2
-bg-red-100
+bg-blue-950 text-white
 text-xs
 `;
 
