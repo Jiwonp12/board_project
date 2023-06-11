@@ -3,8 +3,8 @@ import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import CommentInput from "@/app/components/CommentInput";
 import Comment from "@/app/components/Comment";
-import CommentBtn from "@/app/components/CommentBtn";
 
 const Detail = async (props: { params: { postId: string } }) => {
   const sessionRes = await getServerSession(authOptions);
@@ -56,7 +56,7 @@ const Detail = async (props: { params: { postId: string } }) => {
           {data?.content}
         </article>
       </section>
-      <Comment postId={data?._id?.toString()} />
+      <CommentInput postId={data?._id?.toString()} />
       <ul>
         {data.comment === "0" ? (
           <li className="mb-2 p-1 bg-gray-200 rounded-md">댓글이 없어잉..</li>
@@ -66,21 +66,16 @@ const Detail = async (props: { params: { postId: string } }) => {
               key={el._id.toString()}
               className="mb-2 p-1 flex flex-col bg-gray-200 rounded-md"
             >
-              <div className="flex items-center">
-                <div className="mr-1">{el.user}</div>
-                <CommentBtn
-                  user={el.user}
-                  username={sessionRes?.user?.name}
-                  postId={data?._id.toString()}
-                  commentId={el._id.toString()}
-                  isCommentLiked={like.isCommentLiked}
-                />
-                <div>{el.like}</div>
-              </div>
-              <div>{el.content}</div>
-              <div className="text-sm">
-                {new Date(el.date).toLocaleString()}
-              </div>
+              <Comment
+                user={el.user}
+                username={sessionRes?.user?.name}
+                postId={data?._id.toString()}
+                commentId={el._id.toString()}
+                isCommentLiked={like.isCommentLiked}
+                like={el.like}
+                content={el.content}
+                date={el.date}
+              />
             </li>
           ))
         )}
