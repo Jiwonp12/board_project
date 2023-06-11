@@ -10,21 +10,25 @@ export default async function handler(
     try {
       let db = (await connectDB).db("forum");
       let data = await db
+        .collection("comment")
+        .deleteOne({ _id: new ObjectId(req.query.commentId as string) });
+      let post = await db
         .collection("post")
-        .deleteOne({ _id: new ObjectId(req.query.postId as string) });
-      await db.collection("comment").deleteMany({ parent: req.query.postId });
-      await db
-        .collection("like")
-        .updateMany(
-          {},
-          { $pull: { isLiked: new ObjectId(req.query.postId as string) } }
-        );
+        .findOne({ _id: new ObjectId(req.query.postId as string) });
+      await db.collection("post").updateOne(
+        { _id: new ObjectId(req.query.postId as string) },
+        {
+          $set: {
+            comment: (parseInt(post!.comment) - 1).toString(),
+          },
+        }
+      );
       await db.collection("like").updateMany(
         {},
         {
           $pull: {
             isCommentLiked: {
-              _id: new ObjectId(req.query.postId as string),
+              parentId: new ObjectId(req.query.commentId as string),
             },
           },
         }

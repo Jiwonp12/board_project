@@ -37,13 +37,17 @@ export default async function Header() {
     .findOne({ user: sessionRes?.user?.name });
 
   if (sessionRes && sessionRes.user && !visitedUser) {
-    let like = await db
-      .collection("like")
-      .findOneAndUpdate(
-        { user: sessionRes.user.name },
-        { $setOnInsert: { user: sessionRes.user.name, isLiked: [] } },
-        { upsert: true }
-      );
+    let like = await db.collection("like").findOneAndUpdate(
+      { user: sessionRes.user.name },
+      {
+        $setOnInsert: {
+          user: sessionRes.user.name,
+          isLiked: [],
+          isCommentLiked: [],
+        },
+      },
+      { upsert: true }
+    );
   }
   return (
     <TwHeader>
