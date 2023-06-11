@@ -10,7 +10,7 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 //   content: string;
 //   author: string;
 //   category: string;
-//   comment: string[];
+//   comment: string;
 //   date: string;
 //   like: string;
 // }
@@ -59,7 +59,7 @@ const Item = ({ data }) => {
               icon={faComment}
               className="fa-comment w-[16px] h-[16px] mr-1 text-slate-50 drop-shadow-sm"
             />
-            <div className="mr-4">{post.comment.length}</div>
+            <div className="mr-4">{post.comment}</div>
             <FontAwesomeIcon
               icon={faHeart}
               className="fa-heart w-[16px] h-[16px] mr-1 text-red-500 drop-shadow-sm"

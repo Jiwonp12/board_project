@@ -3,6 +3,8 @@ import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import Comment from "@/app/components/Comment";
+import CommentBtn from "@/app/components/CommentBtn";
 
 const Detail = async (props: { params: { postId: string } }) => {
   const sessionRes = await getServerSession(authOptions);
@@ -13,6 +15,11 @@ const Detail = async (props: { params: { postId: string } }) => {
   let like = await db.collection("like").findOne({
     user: sessionRes?.user?.name,
   });
+  let comment = await db
+    .collection("comment")
+    .find({ parent: props.params.postId })
+    .toArray();
+
   return (
     <div>
       <section
@@ -49,25 +56,35 @@ const Detail = async (props: { params: { postId: string } }) => {
           {data?.content}
         </article>
       </section>
-      <div className="drop-shadow-sm">
-        <form className="w-[70vw] h-[50px] mt-2 flex">
-          <input
-            required
-            name="comment"
-            placeholder="댓글을 입력하세요"
-            className="w-full h-full mr-4 p-1 bg-gray-200 rounded-md"
-          />
-          <button
-            type="submit"
-            className="w-[100px] h-full ml-auto bg-gray-200 rounded-md"
-          >
-            작성
-          </button>
-        </form>
-        <article>
-          {data.comment.length !== 0 ? data.comment : "댓글이 없어잉.."}
-        </article>
-      </div>
+      <Comment postId={data?._id?.toString()} />
+      <ul>
+        {data.comment === "0" ? (
+          <li className="mb-2 p-1 bg-gray-200 rounded-md">댓글이 없어잉..</li>
+        ) : (
+          comment.map(el => (
+            <li
+              key={el._id.toString()}
+              className="mb-2 p-1 flex flex-col bg-gray-200 rounded-md"
+            >
+              <div className="flex items-center">
+                <div className="mr-1">{el.user}</div>
+                <CommentBtn
+                  user={el.user}
+                  username={sessionRes?.user?.name}
+                  postId={data?._id.toString()}
+                  commentId={el._id.toString()}
+                  isCommentLiked={like.isCommentLiked}
+                />
+                <div>{el.like}</div>
+              </div>
+              <div>{el.content}</div>
+              <div className="text-sm">
+                {new Date(el.date).toLocaleString()}
+              </div>
+            </li>
+          ))
+        )}
+      </ul>
     </div>
   );
 };

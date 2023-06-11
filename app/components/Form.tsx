@@ -16,7 +16,7 @@ const Form = ({ data }) => {
         <select
           name="category"
           className="ml-auto rounded-md border border-gray-500"
-          defaultValue={data ? data.category : ""}
+          defaultValue={data ? data.category : "front"}
         >
           <option value="front">프론트엔드</option>
           <option value="back">백엔드</option>
