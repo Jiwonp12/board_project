@@ -52,7 +52,7 @@ export default async function Header() {
   return (
     <TwHeader>
       <TwLink href="/" prefetch={false}>
-        <p className="mx-auto">로고</p>
+        <p className="mx-auto">메인</p>
       </TwLink>
       <TwLink href="/board" prefetch={false}>
         <p className="mx-auto">게시판</p>
@@ -64,7 +64,7 @@ export default async function Header() {
         <p className="mx-auto">후원하기</p>
       </TwLink>
       {sessionRes && (
-        <TwLink href="/info" prefetch={false} as={"image"}>
+        <TwLink href="/info" prefetch={false}>
           <div className="w-full flex items-center justify-evenly">
             <Image
               className="rounded-full"
