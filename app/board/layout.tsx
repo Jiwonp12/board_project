@@ -20,15 +20,9 @@ export default async function BoardLayout({
   const sessionRes = await getServerSession(authOptions);
   return (
     <>
-      <aside className="w-[12%] min-w-[130px] flex flex-col justify-start items-center shrink-0 p-6 bg-transparent">
+      <aside className="min-w-[130px] flex flex-col justify-start items-center shrink-0 m-6 bg-transparent">
         {sessionRes === null ? (
-          <TwLink
-            href="/login"
-            className="bg-gray-500  hover:bg-gray-400 transition duration-200"
-            prefetch={false}
-          >
-            로그인
-          </TwLink>
+          <></>
         ) : (
           <TwLink
             href="/board/write"
@@ -67,8 +61,8 @@ export default async function BoardLayout({
           좋아요
         </TwLink>
       </aside>
-      <div className="w-[76%] flex justify-center">{children}</div>
-      <aside className="w-[12%] min-w-[130px] flex flex-col justify-center items-center shrink-0 p-6 bg-transparent">
+      <div className="flex justify-center">{children}</div>
+      <aside className="min-w-[130px] flex flex-col justify-center items-center m-6 bg-transparent">
         광고야잉
       </aside>
     </>

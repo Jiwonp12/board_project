@@ -23,7 +23,7 @@ cursor-pointer
 `;
 
 const TwHeader = tw.header`
-w-screen h-16 
+h-16 
 flex justify-start items-center
 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%
 px-1 drop-shadow-lg
@@ -51,20 +51,20 @@ export default async function Header() {
   }
   return (
     <TwHeader>
-      <TwLink href="/" prefetch={false}>
-        <p className="mx-auto">로고</p>
-      </TwLink>
+      {/* <TwLink href="/" prefetch={false}>
+        <p className="mx-auto">메인</p>
+      </TwLink> */}
       <TwLink href="/board" prefetch={false}>
         <p className="mx-auto">게시판</p>
       </TwLink>
       <TwLink href="/about" prefetch={false}>
-        <p className="mx-auto">어바웃</p>
+        <p className="mx-auto">About</p>
       </TwLink>
-      <TwLink href="/" className="ml-auto" prefetch={false}>
-        <p className="mx-auto">후원하기</p>
-      </TwLink>
+      {/* <TwLink href="/" className="ml-auto" prefetch={false}>
+        <p className="mx-auto"></p>
+      </TwLink> */}
       {sessionRes && (
-        <TwLink href="/info" prefetch={false} as={"image"}>
+        <TwLink href="/info" prefetch={false} className="ml-auto">
           <div className="w-full flex items-center justify-evenly">
             <Image
               className="rounded-full"
@@ -78,7 +78,9 @@ export default async function Header() {
           </div>
         </TwLink>
       )}
-      <TwSpan className="ml-0">{sessionRes ? <SignOut /> : <SignIn />}</TwSpan>
+      <TwSpan className={sessionRes ? `ml-0` : `ml-auto`}>
+        {sessionRes ? <SignOut /> : <SignIn />}
+      </TwSpan>
     </TwHeader>
   );
 }

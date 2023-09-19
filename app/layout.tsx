@@ -9,11 +9,10 @@ export const metadata = {
 
 const TwMain = tw.main`
   w-full h-full
-  flex flex-grow
+  flex justify-between flex-grow
 `;
 
 const TwFooter = tw.footer`
-w-screen 
 flex justify-center items-center 
 p-2
 bg-blue-950 text-white
@@ -27,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="w-screen min-h-screen h-full flex flex-col">
+      <body className="min-h-screen h-full flex flex-col">
         {/* @ts-expect-error Async Server Component */}
         <Header />
         <TwMain>{children}</TwMain>
