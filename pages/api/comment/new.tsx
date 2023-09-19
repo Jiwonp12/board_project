@@ -12,17 +12,17 @@ export default async function handler(
 
   if (req.method == "POST") {
     req.body = JSON.parse(req.body);
-    let commentToAdd = {
+    const commentToAdd = {
       parent: req.body._id,
       content: req.body.comment,
-      user: sessionRes.user.name,
+      user: sessionRes?.user?.name,
       date: new Date(Date.now()).toISOString(),
       like: "0",
     };
 
-    let db = (await connectDB).db("forum");
-    let comment = await db.collection("comment").insertOne(commentToAdd);
-    let post = await db
+    const db = (await connectDB).db("forum");
+    const comment = await db.collection("comment").insertOne(commentToAdd);
+    const post = await db
       .collection("post")
       .findOne({ _id: new ObjectId(req.body._id) });
     await db.collection("post").updateOne(

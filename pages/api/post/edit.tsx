@@ -7,8 +7,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    let db = (await connectDB).db("forum");
-    let data = await db.collection("post").updateOne(
+    const db = (await connectDB).db("forum");
+    const data = await db.collection("post").updateOne(
       {
         _id: new ObjectId(req.body._id),
       },

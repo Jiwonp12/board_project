@@ -15,17 +15,16 @@ export default async function handler(
       await db.collection("comment").deleteMany({ parent: req.query.postId });
       await db
         .collection("like")
-        .updateMany(
-          {},
-          { $pull: { isLiked: new ObjectId(req.query.postId as string) } }
-        );
+        .updateMany({}, {
+          $pull: { isLiked: new ObjectId(req.query.postId as string) },
+        } as any);
       await db.collection("like").updateMany(
         {},
         {
           $pull: {
             isCommentLiked: {
               _id: new ObjectId(req.query.postId as string),
-            },
+            } as any,
           },
         }
       );

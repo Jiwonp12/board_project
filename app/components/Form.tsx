@@ -1,4 +1,4 @@
-const Form = ({ data }) => {
+const Form = ({ data }: { data: any }) => {
   return (
     <form
       action={data ? "/api/post/edit" : "/api/post/newPost"}

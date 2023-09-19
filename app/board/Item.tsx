@@ -1,20 +1,26 @@
+import { ObjectId } from "mongodb";
 import Link from "next/link";
 import tw from "tailwind-styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 
-// interface Post {
-//   _id: ObjectId;
-//   title: string;
-//   content: string;
-//   author: string;
-//   category: string;
-//   comment: string;
-//   date: string;
-//   like: string;
-// }
-const Item = ({ data }) => {
+export interface Post {
+  _id: ObjectId;
+  title: string;
+  content: string;
+  author: string;
+  category: string;
+  comment: string;
+  date: string;
+  like: string;
+}
+
+interface ItemProps {
+  data: Post[];
+}
+
+const Item = ({ data }: ItemProps) => {
   const TwSection = tw.section`
   w-[70vw] h-[8rem]
   flex flex-col

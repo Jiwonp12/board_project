@@ -6,6 +6,16 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
+interface CommentProps {
+  postId?: string;
+  commentId: string;
+  user: string;
+  username?: string | null | undefined;
+  like: string;
+  content: string;
+  date: string;
+  isCommentLiked?: { _id: string; parentId: string }[];
+}
 const Comment = ({
   postId,
   commentId,
@@ -15,13 +25,13 @@ const Comment = ({
   content,
   date,
   isCommentLiked,
-}) => {
+}: CommentProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  let [commentState, setCommentState] = useState(content);
+  const [commentState, setCommentState] = useState(content);
 
-  const handleChangeComment = e => {
+  const handleChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentState(e.target.value);
   };
 
@@ -38,7 +48,7 @@ const Comment = ({
         }
       );
       if (response.status === 204) {
-        window.location.href = `/board`;
+        window.location.href = `/board/${postId}`;
       }
     } catch (error) {
       console.error("delete error", error);
@@ -63,7 +73,7 @@ const Comment = ({
       setIsButtonDisabled(false);
     }
   };
-  let colorBtn = isCommentLiked.some(
+  const colorBtn = isCommentLiked?.some(
     item =>
       item._id.toString() === postId && item.parentId.toString() === commentId
   );
