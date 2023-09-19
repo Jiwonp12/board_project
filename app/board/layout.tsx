@@ -53,15 +53,15 @@ export default async function BoardLayout({
         >
           백엔드
         </TwLink>
-        <TwLink
+        {/* <TwLink
           href="/board"
           className="bg-red-500  hover:bg-red-400 transition duration-200"
           prefetch={false}
         >
           좋아요
-        </TwLink>
+        </TwLink> */}
       </aside>
-      <div className="flex justify-center">{children}</div>
+      <div className="flex justify-center flex-grow">{children}</div>
       <aside className="min-w-[130px] flex flex-col justify-center items-center m-6 bg-transparent">
         광고야잉
       </aside>

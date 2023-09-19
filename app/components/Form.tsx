@@ -3,14 +3,14 @@ const Form = ({ data }: { data: any }) => {
     <form
       action={data ? "/api/post/edit" : "/api/post/newPost"}
       method="POST"
-      className="mt-4 p-2 flex flex-col w-full"
+      className="mt-4 p-2 flex flex-col w-[70vw]"
     >
       <div className="flex">
         <input
           required
           name="title"
           placeholder="제목을 입력하세요"
-          className="w-3/4 h-12 rounded-md border border-gray-500"
+          className="w-3/4 h-12 px-2 rounded-md border border-gray-500"
           defaultValue={data ? data.title : ""}
         />
         <select
@@ -26,7 +26,7 @@ const Form = ({ data }: { data: any }) => {
         required
         name="content"
         placeholder="내용을 입력하세요"
-        className="h-3/4 mt-8 rounded-md border border-gray-500"
+        className="h-3/4 mt-8 p-2 rounded-md border border-gray-500"
         defaultValue={data ? data.content : ""}
       />
       <button

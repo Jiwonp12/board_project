@@ -62,7 +62,7 @@ const AboutPage = () => {
   return (
     <div className="w-full p-12 flex flex-col">
       <div className="flex flex-col items-center mb-10">
-        <b className="text-lg mb-6">게시판 프로젝트</b>
+        <h1 className="font-bold text-xl mb-6">게시판 프로젝트</h1>
         <p className="text-lg mb-2">
           Next.JS를 이용한 게시판 만들기 솔로 프로젝트로, 새로운 스택들을
           사용하여 역량을 늘리고 팀원들과 코드리뷰를 통해 피드백을 주고받는
@@ -71,7 +71,7 @@ const AboutPage = () => {
         <p>프로젝트 기간: 05.23 ~ 06.09</p>
       </div>
       <div className="flex flex-col items-center mb-10">
-        <b className="text-lg my-6">팀원 소개</b>
+        <h2 className="font-bold text-lg my-6">팀원 소개</h2>
         <ul className="w-full flex justify-center">
           {data.map(member => (
             <li key={member.name} className="flex flex-col items-center mx-4">
