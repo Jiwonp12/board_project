@@ -8,11 +8,11 @@ export default async function handler(
 ) {
   if (req.method === "DELETE") {
     try {
-      let db = (await connectDB).db("forum");
-      let data = await db
+      const db = (await connectDB).db("forum");
+      const data = await db
         .collection("comment")
         .deleteOne({ _id: new ObjectId(req.query.commentId as string) });
-      let post = await db
+      const post = await db
         .collection("post")
         .findOne({ _id: new ObjectId(req.query.postId as string) });
       await db.collection("post").updateOne(
@@ -29,7 +29,7 @@ export default async function handler(
           $pull: {
             isCommentLiked: {
               parentId: new ObjectId(req.query.commentId as string),
-            },
+            } as any,
           },
         }
       );

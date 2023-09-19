@@ -19,6 +19,7 @@ export default async function handler(
 
   try {
     const keysForAdd: KeysForAdd = {
+      category: req.body.category,
       author: sessionRes!.user!.name!,
       date: new Date(Date.now()).toISOString(),
       like: "0",
@@ -26,8 +27,8 @@ export default async function handler(
     };
 
     if (req.method === "POST") {
-      let db = (await connectDB).db("forum");
-      let data = await db
+      const db = (await connectDB).db("forum");
+      const data = await db
         .collection("post")
         .insertOne({ ...req.body, ...keysForAdd });
       res.writeHead(302, { Location: "/board" });

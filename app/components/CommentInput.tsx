@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-export default function CommentInput({ postId }) {
+export default function CommentInput({ postId }: { postId?: string }) {
   let [commentState, setCommentState] = useState("");
 
-  const handleChangeComment = e => {
+  const handleChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentState(e.target.value);
   };
 

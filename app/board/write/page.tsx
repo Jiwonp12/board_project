@@ -1,7 +1,7 @@
 import Form from "@/app/components/Form";
 
 const Write = () => {
-  const data = undefined;
+  const data = null;
   return <Form data={data} />;
 };
 

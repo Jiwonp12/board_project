@@ -7,7 +7,17 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-const Button = ({ dataId, author, username, isLiked }) => {
+const Button = ({
+  dataId,
+  author,
+  username,
+  isLiked,
+}: {
+  dataId?: string;
+  author?: string;
+  username?: string | null | undefined;
+  isLiked?: string;
+}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleDelete = async () => {
@@ -67,7 +77,7 @@ const Button = ({ dataId, author, username, isLiked }) => {
         onClick={handleLike}
         icon={faHeart}
         className={
-          isLiked !== -1
+          isLiked !== "-1"
             ? "fa-heart w-[20px] h-[20px] mr-1 text-red-500 drop-shadow-sm cursor-pointer"
             : "fa-heart w-[20px] h-[20px] mr-1 text-gray-500 drop-shadow-sm cursor-pointer"
         }

@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   if (req.method == "POST") {
     req.body = JSON.parse(req.body);
-    let db = (await connectDB).db("forum");
+    const db = (await connectDB).db("forum");
     await db.collection("comment").updateOne(
       { _id: new ObjectId(req.body._id) },
       {

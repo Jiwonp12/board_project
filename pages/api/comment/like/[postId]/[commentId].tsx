@@ -10,19 +10,19 @@ export default async function handler(
 ) {
   const sessionRes = await getServerSession(req, res, authOptions);
   if (req.method === "POST") {
-    let db = (await connectDB).db("forum");
+    const db = (await connectDB).db("forum");
 
-    let like = await db.collection("like").findOne({
-      user: sessionRes.user.name,
+    const like = await db.collection("like").findOne({
+      user: sessionRes?.user?.name,
     });
 
-    let comment = await db
+    const comment = await db
       .collection("comment")
       .findOne({ _id: new ObjectId(req.query.commentId as string) });
 
     if (like) {
       const isLiked = like.isCommentLiked.some(
-        item =>
+        (item: { _id: ObjectId; parentId: ObjectId }) =>
           item._id.toString() ===
             new ObjectId(req.query.postId as string).toString() &&
           item.parentId.toString() ===

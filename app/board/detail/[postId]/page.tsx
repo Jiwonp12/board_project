@@ -8,14 +8,14 @@ import Comment from "@/app/components/Comment";
 
 const Detail = async (props: { params: { postId: string } }) => {
   const sessionRes = await getServerSession(authOptions);
-  let db = (await connectDB).db("forum");
-  let data = await db
+  const db = (await connectDB).db("forum");
+  const data = await db
     .collection("post")
     .findOne({ _id: new ObjectId(props.params.postId) });
-  let like = await db.collection("like").findOne({
+  const like = await db.collection("like").findOne({
     user: sessionRes?.user?.name,
   });
-  let comment = await db
+  const comment = await db
     .collection("comment")
     .find({ parent: props.params.postId })
     .toArray();
@@ -46,8 +46,8 @@ const Detail = async (props: { params: { postId: string } }) => {
             dataId={data?._id.toString()}
             author={data?.author}
             username={sessionRes?.user?.name}
-            isLiked={like.isLiked.findIndex(
-              postId => postId.toString() === props.params.postId
+            isLiked={like?.isLiked.findIndex(
+              (postId: number) => postId.toString() === props.params.postId
             )}
           />
           <span>{data?.like}</span>
@@ -58,7 +58,7 @@ const Detail = async (props: { params: { postId: string } }) => {
       </section>
       <CommentInput postId={data?._id?.toString()} />
       <ul>
-        {data.comment === "0" ? (
+        {data?.comment === "0" ? (
           <li className="mb-2 p-1 bg-gray-200 rounded-md">댓글이 없어잉..</li>
         ) : (
           comment.map(el => (
@@ -71,7 +71,7 @@ const Detail = async (props: { params: { postId: string } }) => {
                 username={sessionRes?.user?.name}
                 postId={data?._id.toString()}
                 commentId={el._id.toString()}
-                isCommentLiked={like.isCommentLiked}
+                isCommentLiked={like?.isCommentLiked}
                 like={el.like}
                 content={el.content}
                 date={el.date}
