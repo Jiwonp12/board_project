@@ -5,10 +5,15 @@ import kakao from "../public/kakao_login_medium.png";
 import Image from "next/image";
 
 export function SignOut() {
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/board";
+  };
+
   return (
     <button
       className="flex bg-black text-white px-4 py-3 rounded-md font-semibold text-sm hover:text-white transition-all border border-gray-800"
-      onClick={() => signOut()}
+      onClick={handleSignOut}
     >
       로그아웃
     </button>
