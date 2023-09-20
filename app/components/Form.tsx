@@ -10,12 +10,12 @@ const Form = ({ data }: { data: any }) => {
           required
           name="title"
           placeholder="제목을 입력하세요"
-          className="w-3/4 h-12 px-2 rounded-md border border-gray-500"
+          className="w-3/4 h-12 px-2 rounded-md border bg-indigo-100 outline-white"
           defaultValue={data ? data.title : ""}
         />
         <select
           name="category"
-          className="ml-auto rounded-md border border-gray-500"
+          className="ml-auto rounded-md border bg-indigo-100 cursor-pointer hover:bg-indigo-50"
           defaultValue={data ? data.category : "front"}
         >
           <option value="front">프론트엔드</option>
@@ -26,12 +26,12 @@ const Form = ({ data }: { data: any }) => {
         required
         name="content"
         placeholder="내용을 입력하세요"
-        className="h-3/4 mt-8 p-2 rounded-md border border-gray-500"
+        className="h-3/4 mt-8 p-2 rounded-md border flex-grow bg-indigo-100 outline-white"
         defaultValue={data ? data.content : ""}
       />
       <button
         type="submit"
-        className="mt-2 rounded-md border border-gray-500 flex-grow"
+        className="w-[80px] h-[40px] mt-2 ml-auto rounded-md text-white bg-emerald-500 hover:text-black hover:bg-emerald-400 transition duration-200"
       >
         작성
       </button>
