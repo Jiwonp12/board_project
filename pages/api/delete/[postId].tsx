@@ -8,16 +8,14 @@ export default async function handler(
 ) {
   if (req.method === "DELETE") {
     try {
-      let db = (await connectDB).db("forum");
-      let data = await db
+      const db = (await connectDB).db("forum");
+      const data = await db
         .collection("post")
         .deleteOne({ _id: new ObjectId(req.query.postId as string) });
       await db.collection("comment").deleteMany({ parent: req.query.postId });
-      await db
-        .collection("like")
-        .updateMany({}, {
-          $pull: { isLiked: new ObjectId(req.query.postId as string) },
-        } as any);
+      await db.collection("like").updateMany({}, {
+        $pull: { isLiked: new ObjectId(req.query.postId as string) },
+      } as any);
       await db.collection("like").updateMany(
         {},
         {
