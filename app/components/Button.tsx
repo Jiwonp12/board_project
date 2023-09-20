@@ -16,7 +16,7 @@ const Button = ({
   dataId?: string;
   author?: string;
   username?: string | null | undefined;
-  isLiked?: string;
+  isLiked?: number;
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -77,7 +77,7 @@ const Button = ({
         onClick={handleLike}
         icon={faHeart}
         className={
-          isLiked !== "-1"
+          isLiked !== -1
             ? "fa-heart w-[20px] h-[20px] mr-1 text-red-500 drop-shadow-sm cursor-pointer"
             : "fa-heart w-[20px] h-[20px] mr-1 text-gray-500 drop-shadow-sm cursor-pointer"
         }
